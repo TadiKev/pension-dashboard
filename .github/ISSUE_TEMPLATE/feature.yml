@@ -1,0 +1,13 @@
+﻿name: Feature request
+about: Request a new feature
+title: "feat: "
+labels: ["type:feature"]
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+  - type: textarea
+    id: description
+    attributes:
+      label: Description

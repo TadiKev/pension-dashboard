@@ -1,0 +1,10 @@
+﻿{
+  "name": "pension-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "echo \"Start script placeholder\"",
+    "test": "echo \"Test placeholder\"",
+    "lint": "echo \"Lint placeholder\""
+  }
+}
