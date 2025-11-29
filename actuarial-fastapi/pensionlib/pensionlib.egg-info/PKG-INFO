@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: pensionlib
+Version: 0.1.0
+Summary: Deterministic pension actuarial engine (pensionlib)
+Requires-Dist: pydantic>=2.0
+Dynamic: requires-dist
+Dynamic: summary

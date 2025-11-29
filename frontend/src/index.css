@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+--bg: #f7faf9;
+--muted: #6b7280;
+}
+
+
+/* simple container styling */
+.container {
+@apply max-w-6xl mx-auto p-4;
+}

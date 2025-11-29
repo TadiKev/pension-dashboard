@@ -1,0 +1,3 @@
+"employee_id","name","department","start_date","end_date"
+"E001","Alice Johnson","Finance","2018-05-10",""
+"E002","Bob Smith","Engineering","2019-03-01","2023-12-31"

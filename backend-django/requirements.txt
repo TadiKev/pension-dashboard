@@ -1,4 +1,13 @@
-﻿Django>=4.2
-djangorestframework
-psycopg2-binary
-pytest
+# Django backend requirements
+Django>=4.2
+djangorestframework>=3.14
+djangorestframework-simplejwt>=5.2.2
+django-cors-headers>=4.0
+psycopg2-binary>=2.9      # Postgres driver (use mysqlclient if you're on MySQL)
+python-dotenv>=1.0
+requests>=2.31.0
+python-json-logger>=2.0
+pycryptodome>=3.17
+# extras that are useful for deployment/tests
+gunicorn>=20.1.0
+pytest>=7.0
