@@ -1,13 +1,18 @@
-# actuarial-fastapi/api/auth_deps.py
+﻿# actuarial-fastapi/api/auth_deps.py
 import os
-from fastapi import Depends, HTTPException, Security
+from fastapi import Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 import jwt
 
 security = HTTPBearer()
 
-SECRET = os.environ.get("FASTAPI_JWT_SECRET") or os.environ.get("DJANGO_SECRET_KEY") or "please-change-me"
+SECRET = (
+    os.environ.get("FASTAPI_JWT_SECRET")
+    or os.environ.get("DJANGO_SECRET_KEY")
+    or "please-change-me"
+)
 ALGORITHM = os.environ.get("FASTAPI_JWT_ALG", "HS256")
+
 
 def verify_jwt(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
     """

@@ -6,8 +6,13 @@ import jwt
 
 security = HTTPBearer()
 
-JWT_SIGNING_KEY = os.environ.get("SIMPLE_JWT_SIGNING_KEY") or os.environ.get("DJANGO_SECRET_KEY") or "dev-secret"
+JWT_SIGNING_KEY = (
+    os.environ.get("SIMPLE_JWT_SIGNING_KEY")
+    or os.environ.get("DJANGO_SECRET_KEY")
+    or "dev-secret"
+)
 ALGORITHM = os.environ.get("SIMPLE_JWT_ALGORITHM", "HS256")
+
 
 def verify_jwt(creds: HTTPAuthorizationCredentials = Depends(security)) -> dict:
     """

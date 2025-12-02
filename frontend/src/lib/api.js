@@ -1,4 +1,4 @@
-// frontend/src/lib/api.js
+﻿// frontend/src/lib/api.js
 // Lightweight API helper using fetch and Vite envs.
 // Exports: API_BASE, FASTAPI_BASE, getAuthToken(), apiFetch(), fastapiPost()
 
@@ -25,7 +25,7 @@ export function getAuthToken() {
       const raw = (fn() || "").trim();
       if (!raw) continue;
       if (raw.split(".").length === 3) return raw;
-    } catch (e) {
+    } catch {
       // ignore storage errors and continue
     }
   }

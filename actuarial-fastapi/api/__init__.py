@@ -4,7 +4,7 @@ import sys
 
 # make imports deterministic for local dev/tests:
 # ensure actuarial-fastapi and backend-django are first on sys.path
-HERE = os.path.dirname(os.path.abspath(__file__))         # .../actuarial-fastapi/api
+HERE = os.path.dirname(os.path.abspath(__file__))  # .../actuarial-fastapi/api
 ACTUARIAL_ROOT = os.path.abspath(os.path.join(HERE, ".."))  # .../actuarial-fastapi
 REPO_ROOT = os.path.abspath(os.path.join(ACTUARIAL_ROOT, ".."))  # repo root
 BACKEND_DJANGO = os.path.join(REPO_ROOT, "backend-django")

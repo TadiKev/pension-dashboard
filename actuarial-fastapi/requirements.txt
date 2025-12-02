@@ -11,5 +11,3 @@ orjson>=3.8.6          # optional: faster JSON if you use it in FastAPI
 requests>=2.31.0       # used by sync proxy or tests
 pytest>=7.0
 pytest-asyncio>=0.21
-
-

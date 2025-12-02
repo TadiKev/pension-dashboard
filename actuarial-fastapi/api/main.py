@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import datetime
-import math
+
 import os
 import logging
 
@@ -33,23 +33,31 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # optional debug middleware that logs Authorization header (safe masking)
 @app.middleware("http")
 async def auth_debug_middleware(request: Request, call_next):
     try:
         auth = request.headers.get("authorization")
-        logger.info(f"[AUTH-DBG] {request.method} {request.url.path} Authorization: {'<present>' if auth else '<missing>'}")
+        logger.info(
+            f"[AUTH-DBG] {request.method} {request.url.path} Authorization: {'<present>' if auth else '<missing>'}"
+        )
         if auth:
             try:
                 token = auth.split(None, 1)[1]
             except Exception:
                 token = auth
-            masked = token if not isinstance(token, str) else (token[:8] + "..." + token[-8:] if len(token) > 32 else token)
+            masked = (
+                token
+                if not isinstance(token, str)
+                else (token[:8] + "..." + token[-8:] if len(token) > 32 else token)
+            )
             logger.info(f"[AUTH-DBG] token masked: {masked}")
     except Exception:
         logger.exception("[AUTH-DBG] logging error")
     resp = await call_next(request)
     return resp
+
 
 # Helper to build a projection from payload
 def build_projection(payload: dict):
@@ -124,6 +132,7 @@ def build_projection(payload: dict):
         )
 
     return projection, allocations, transactions
+
 
 @app.post("/v1/dc/project")
 async def dc_project(payload: dict):

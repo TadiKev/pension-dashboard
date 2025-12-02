@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 
+
 class OptionsPassthroughMiddleware:
     """
     Return 200 for OPTIONS preflight on /api/* and add permissive CORS headers on API responses.
@@ -12,8 +13,13 @@ class OptionsPassthroughMiddleware:
         # Preflight short-circuit for API paths
         if request.method == "OPTIONS" and request.path.startswith("/api/"):
             origin = request.headers.get("Origin", "*")
-            request_headers = request.headers.get("Access-Control-Request-Headers", "Authorization,Content-Type")
-            request_method = request.headers.get("Access-Control-Request-Method", "POST, GET, OPTIONS, PUT, DELETE, PATCH")
+            request_headers = request.headers.get(
+                "Access-Control-Request-Headers", "Authorization,Content-Type"
+            )
+            request_method = request.headers.get(
+                "Access-Control-Request-Method",
+                "POST, GET, OPTIONS, PUT, DELETE, PATCH",
+            )
 
             response = HttpResponse()
             response["Access-Control-Allow-Origin"] = origin

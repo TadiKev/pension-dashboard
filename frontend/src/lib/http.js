@@ -1,4 +1,4 @@
-// src/lib/http.js
+﻿// src/lib/http.js
 // Axios-based clients for FastAPI and Django with token helpers and good dev diagnostics.
 //
 // Usage:
@@ -109,7 +109,7 @@ function handle401(err) {
   if (status === 401) {
     try {
       window.dispatchEvent(new CustomEvent("auth:unauthorized", { detail: { url: err?.config?.url } }));
-    } catch (e) {
+    } catch {
       // ignore
     }
   }

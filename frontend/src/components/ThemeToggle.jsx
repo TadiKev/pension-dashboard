@@ -18,12 +18,12 @@ export default function ThemeToggle() {
     <button
       onClick={() => setDark((d) => !d)}
       className="
-        p-2 
-        rounded-xl 
-        transition 
+        p-2
+        rounded-xl
+        transition
         duration-300
-        bg-gray-200 
-        dark:bg-gray-800 
+        bg-gray-200
+        dark:bg-gray-800
         hover:bg-gray-300
         dark:hover:bg-gray-700
         text-gray-800

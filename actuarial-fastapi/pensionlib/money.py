@@ -5,8 +5,10 @@ getcontext().prec = 28
 DEFAULT_CONTEXT = Context(prec=28, rounding=ROUND_HALF_UP)
 QUANT = Decimal("0.01")
 
+
 class Money:
     """Small Money helper that wraps Decimal and provides consistent quantize behaviour."""
+
     def __init__(self, value):
         if isinstance(value, Money):
             self.value = value.value

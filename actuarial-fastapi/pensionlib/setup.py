@@ -5,7 +5,5 @@ setup(
     version="0.1.0",
     description="Deterministic pension actuarial engine (pensionlib)",
     packages=find_packages(),
-    install_requires=[
-        "pydantic>=2.0"
-    ],
+    install_requires=["pydantic>=2.0"],
 )

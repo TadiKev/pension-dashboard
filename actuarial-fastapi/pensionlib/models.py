@@ -2,6 +2,7 @@
 from decimal import Decimal
 from typing import List
 
+
 class DCProjectionInput(BaseModel):
     current_balance: Decimal
     annual_salary: Decimal
@@ -11,7 +12,9 @@ class DCProjectionInput(BaseModel):
     years: int = Field(..., ge=0)
     accrual_frequency: int = Field(1, ge=1)
 
-    @field_validator("contribution_rate", "salary_growth", "rate_of_return", mode="before")
+    @field_validator(
+        "contribution_rate", "salary_growth", "rate_of_return", mode="before"
+    )
     def _to_decimal(cls, v):
         return Decimal(str(v))
 
@@ -21,16 +24,19 @@ class DCProjectionInput(BaseModel):
             raise ValueError("contribution_rate must be between 0 and 1 (decimal)")
         return v
 
+
 class YearBalance(BaseModel):
     year: int
     salary: Decimal
     contribution: Decimal
     balance: Decimal
 
+
 class DCProjectionOutput(BaseModel):
     initial_balance: Decimal
     annual_balances: List[YearBalance]
     final_balance: Decimal
+
 
 class DBAccrualInput(BaseModel):
     final_salary: Decimal
@@ -41,9 +47,11 @@ class DBAccrualInput(BaseModel):
     def _to_decimal_accrual(cls, v):
         return Decimal(str(v))
 
+
 class DBAccrualOutput(BaseModel):
     annual_accrual: Decimal
     total_pension: Decimal
+
 
 class AnnuityInput(BaseModel):
     lump_sum: Decimal
@@ -54,6 +62,7 @@ class AnnuityInput(BaseModel):
     @field_validator("rate_of_return", mode="before")
     def _to_decimal_rate(cls, v):
         return Decimal(str(v))
+
 
 class AnnuityOutput(BaseModel):
     periodic_payment: Decimal

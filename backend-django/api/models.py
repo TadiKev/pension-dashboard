@@ -23,7 +23,7 @@ class Company(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='created_companies'
+        related_name="created_companies",
     )
 
     def __str__(self):
@@ -31,7 +31,9 @@ class Company(models.Model):
 
 
 class Member(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='members')
+    company = models.ForeignKey(
+        Company, on_delete=models.CASCADE, related_name="members"
+    )
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
     date_of_birth = models.DateField(null=True, blank=True)
@@ -44,19 +46,18 @@ class Member(models.Model):
 
 class PensionAccount(models.Model):
     STATUS_CHOICES = (
-        ('active', 'Active'),
-        ('closed', 'Closed'),
-        ('suspended', 'Suspended'),
+        ("active", "Active"),
+        ("closed", "Closed"),
+        ("suspended", "Suspended"),
     )
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='accounts')
+    member = models.ForeignKey(
+        Member, on_delete=models.CASCADE, related_name="accounts"
+    )
     account_number = models.CharField(max_length=64, unique=True)
     balance = models.DecimalField(
-        max_digits=14,
-        decimal_places=2,
-        default=0,
-        validators=[MinValueValidator(0)]
+        max_digits=14, decimal_places=2, default=0, validators=[MinValueValidator(0)]
     )
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="active")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -65,17 +66,23 @@ class PensionAccount(models.Model):
 
 class Transaction(models.Model):
     TRAN_TYPE = (
-        ('contribution', 'Contribution'),
-        ('payout', 'Payout'),
-        ('adjustment', 'Adjustment'),
+        ("contribution", "Contribution"),
+        ("payout", "Payout"),
+        ("adjustment", "Adjustment"),
     )
-    account = models.ForeignKey(PensionAccount, on_delete=models.CASCADE, related_name='transactions')
+    account = models.ForeignKey(
+        PensionAccount, on_delete=models.CASCADE, related_name="transactions"
+    )
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     transaction_type = models.CharField(max_length=20, choices=TRAN_TYPE)
     date = models.DateTimeField(default=timezone.now)
     source = models.CharField(max_length=255, blank=True, null=True)
     created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name='transactions_created'
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="transactions_created",
     )
 
     def __str__(self):
@@ -83,7 +90,13 @@ class Transaction(models.Model):
 
 
 class AssumptionSet(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='assumptions', null=True, blank=True)
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name="assumptions",
+        null=True,
+        blank=True,
+    )
     name = models.CharField(max_length=255)
     # Django 3.1+ has models.JSONField. In older versions a TextField could be used.
     try:
@@ -93,7 +106,9 @@ class AssumptionSet(models.Model):
 
     assumptions = _json_field(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return f"{self.name} ({self.company})"
